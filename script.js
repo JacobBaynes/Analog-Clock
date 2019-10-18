@@ -3,9 +3,9 @@ const MINUTEHAND = document.querySelector("#minute");
 const SECONDHAND = document.querySelector("#second");
 
 const PACIFIC = document.querySelector("#pacific");
-// const MOUNTAIN = document.querySelector("#mountain");
-// const CENTRAL = document.querySelector("#central");
-// const EASTERN = document.querySelector("#easter");
+const MOUNTAIN = document.querySelector("#mountain");
+const CENTRAL = document.querySelector("#central");
+const EASTERN = document.querySelector("#easter");
 const MY = document.querySelector("#my");
 
 var interval
@@ -65,51 +65,50 @@ function pacificTime() {
     let pacTime = utc - (3600000 * offset);
     let newDate = new Date(pacTime);
     setClock(newDate);
-
-    // let hr = date.getHours();
-    // let min = date.getMinutes();
-    // let sec = date.getSeconds();
-
-    // let hrPos = (hr*360/12)+(min*(360/60)/12);
-    // let minPos = (min*360/60)+(sec*(360/60)/60);
-    // let secPos = sec*360/60;
-
-    // var interval = setInterval(runTheClock, 1000);
 }
 
-// function mountainTime() {
-//     let localTime = date.getTime();
-//     let localOffset = date.getTimezoneOffset() * 60000;
+function mountainTime() {
+    clearInterval(interval);
+    interval = null;
+    let d = new Date();
+    let localTime = d.getTime();
+    let localOffset = d.getTimezoneOffset() * 60000;
+    let utc = localTime + localOffset;
+    let offset = 7
+    let pacTime = utc - (3600000 * offset);
+    let newDate = new Date(pacTime);
+    setClock(newDate);
+}
 
-//     let utc = localTime + localOffset;
-//     let offset = 8
-//     let pacTime = utc - (3600000 * offset);
-//     let newDate = new Date(pacTime);
-//     console.log(newDate);
-// }
+function centralTime() {
+    clearInterval(interval);
+    interval = null;
+    let d = new Date();
+    let localTime = d.getTime();
+    let localOffset = d.getTimezoneOffset() * 60000;
+    let utc = localTime + localOffset;
+    let offset = 6
+    let pacTime = utc - (3600000 * offset);
+    let newDate = new Date(pacTime);
+    setClock(newDate);
+}
 
-// function centralTime() {
-//     let localTime = date.getTime();
-//     let localOffset = date.getTimezoneOffset() * 60000;
-
-//     let utc = localTime + localOffset;
-//     let offset = 8
-//     let pacTime = utc - (3600000 * offset);
-//     let newDate = new Date(pacTime);
-//     console.log(newDate);
-// }
-
-// function easternTime() {
-//     let localTime = date.getTime();
-//     let localOffset = date.getTimezoneOffset() * 60000;
-
-//     let utc = localTime + localOffset;
-//     let offset = 8
-//     let pacTime = utc - (3600000 * offset);
-//     let newDate = new Date(pacTime);
-//     console.log(newDate);
-// }
+function easternTime() {
+    clearInterval(interval);
+    interval = null;
+    let d = new Date();
+    let localTime = d.getTime();
+    let localOffset = d.getTimezoneOffset() * 60000;
+    let utc = localTime + localOffset;
+    let offset = 5
+    let pacTime = utc - (3600000 * offset);
+    let newDate = new Date(pacTime);
+    setClock(newDate);
+}
 
 
 PACIFIC.addEventListener("click", pacificTime, false);
+MOUNTAIN.addEventListener("click", mountainTime, false);
+CENTRAL.addEventListener("click", centralTime, false);
+EASTERN.addEventListener("click", easternTime, false);
 MY.addEventListener("click", myTime, false);
